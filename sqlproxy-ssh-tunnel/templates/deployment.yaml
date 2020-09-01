@@ -19,10 +19,10 @@ spec:
             - containerPort: 22
               protocol: TCP
           volumeMounts:
-            - name: authorizedKeys
+            - name: authorized-keys
               mountPath: /home/sshuser/.ssh
               readOnly: true
-            - name: sshdConfig
+            - name: sshd-config
               mountPath: /etc/ssh/sshd_config
               subPath: sshd_config
               readOnly: true
@@ -35,17 +35,17 @@ spec:
               "-credential_file=/secrets/cloudsql/sql_credentials.json",
             ]
           volumeMounts:
-            - name: sqlproxyCredential
+            - name: sqlproxy-credential
               mountPath: /secrets/cloudsql
               readOnly: true
       volumes:
-        - name: sshdConfig
+        - name: sshd-config
           configMap:
-            name: sshdConfig
-        - name: sqlproxyCredential
+            name: sshd-config
+        - name: sqlproxy-credential
           secret:
-            secretName: sqlproxyCredential
-        - name: authorizedKeys
+            secretName: sqlproxy-credential
+        - name: authorized-keys
           defaultMode: 0644
           secret:
-            secretName: authorizedKeys
+            secretName: authorized-keys
