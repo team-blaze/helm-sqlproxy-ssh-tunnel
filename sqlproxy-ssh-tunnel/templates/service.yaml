@@ -19,7 +19,7 @@ spec:
 {{- end }}
   selector:
     app: {{.Values.name}}
-  type: LoadBalancer
+  type: {{.Values.service.type}}
 {{- if .Values.service.loadBalancerIP }}
   loadBalancerIP: {{ .Values.service.loadBalancerIP }}
 {{- end }}
