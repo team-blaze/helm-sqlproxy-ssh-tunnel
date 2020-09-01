@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{.Values.name}}
+{{- if .Values.service.annotations }}
+  annotations:
+{{ toYaml .Values.service.annotations | indent 4 }}
+{{- end }}
+spec:
+{{- if .Values.service.externalIPs }}
+  externalIPs:
+{{ toYaml .Values.service.externalIPs | indent 4 }}
+{{- end }}
+  ports:
+    - name: ssh
+      port: 22
+{{- if and (eq "NodePort" .Values.service.type) (hasKey .Values.service "nodePort") }}
+      nodePort: {{ .Values.service.nodePort }}
+{{- end }}
+  selector:
+    app: {{.Values.name}}
+  type: LoadBalancer
+{{- if .Values.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.service.loadBalancerIP }}
+{{- end }}

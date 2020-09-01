@@ -1,0 +1,20 @@
+name: sqlproxy-ssh-tunnel
+image: berylcc/sqlproxy-ssh-tunnel:1.0
+# imagePullSecrets: "my-docker-repo-secret"
+authorizedKeysBase64: "nice long base64 encoded string of authorized_keys"
+
+cloudsql:
+  project: "my-project"
+  region: "us-west1"
+  instance: "sql_instance"
+  port: 3306
+  serviceAccountKeyBase64: "nice long base64 encoded of Google service account JSON"
+
+service:
+  ## Here annotations can be added to the service
+  # annotations:
+  #   external-dns.alpha.kubernetes.io/hostname: vpn.example.com
+  annotations: {}
+  nodePort: 32077
+  externalIPs: []
+  # loadBalancerIP: 10.0.0.1

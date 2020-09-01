@@ -1,0 +1,51 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{.Values.name}}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: {{.Values.name}}
+      labels:
+        app: {{.Values.name}}
+    spec:
+      dnsPolicy: ClusterFirst
+      containers:
+        - name: {{.Values.name}}
+          image: {{.Values.image}}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 22
+              protocol: TCP
+          volumeMounts:
+            - name: authorized_keys
+              mountPath: /home/sshuser/.ssh
+              readOnly: true
+            - name: sshd_config
+              mountPath: /etc/ssh/sshd_config
+              subPath: sshd_config
+              readOnly: true
+        - name: sqlproxy
+          image: gcr.io/cloudsql-docker/gce-proxy:1.17-alpine
+          command:
+            [
+              "/cloud_sql_proxy",
+              "-instances={{.Values.cloudsql.project}}:{{.Values.cloudsql.region}}:{{.Values.cloudsql.instance}}=tcp:{{.Values.cloudsql.port}}",
+              "-credential_file=/secrets/cloudsql/sql_credentials.json",
+            ]
+          volumeMounts:
+            - name: sqlproxy_credential
+              mountPath: /secrets/cloudsql
+              readOnly: true
+      volumes:
+        - name: sshd_config
+          configMap:
+            name: sshd_config
+        - name: sqlproxy_credential
+          secret:
+            secretName: sqlproxy_credential
+        - name: authorized_keys
+          defaultMode: 0644
+          secret:
+            secretName: authorized_keys

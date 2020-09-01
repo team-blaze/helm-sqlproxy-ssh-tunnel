@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: authorized_keys
+type: Opaque
+data:
+  authorized_keys: {{.Values.authorizedKeysBase64}}
