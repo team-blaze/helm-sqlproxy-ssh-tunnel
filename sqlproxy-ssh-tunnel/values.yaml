@@ -11,7 +11,7 @@ cloudsql:
   serviceAccountKeyBase64: "nice long base64 encoded of Google service account JSON"
 
 service:
-  type: LoadBalancer
+  type: "LoadBalancer"
   ## Here annotations can be added to the service
   # annotations:
   #   external-dns.alpha.kubernetes.io/hostname: vpn.example.com
