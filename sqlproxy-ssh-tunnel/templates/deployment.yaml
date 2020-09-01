@@ -15,6 +15,10 @@ spec:
         - name: {{.Values.name}}
           image: {{.Values.image}}
           imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 5m
+              memory: 10Mi
           ports:
             - containerPort: 22
               protocol: TCP
