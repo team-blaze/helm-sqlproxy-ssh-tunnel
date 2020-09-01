@@ -46,6 +46,6 @@ spec:
           secret:
             secretName: sqlproxy-credential
         - name: authorized-keys
-          defaultMode: 0644
+          defaultMode: 0600
           secret:
             secretName: authorized-keys
