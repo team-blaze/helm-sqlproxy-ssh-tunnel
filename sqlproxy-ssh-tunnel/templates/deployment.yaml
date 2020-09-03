@@ -24,7 +24,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: authorized-keys
-              mountPath: /home/sshuser/.ssh
+              mountPath: /home/sshuser/.ssh/authorized_keys
               subPath: authorized_keys
               readOnly: true
             - name: server-key
