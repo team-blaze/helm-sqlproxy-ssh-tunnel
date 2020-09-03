@@ -18,7 +18,7 @@ data:
 
     # NON-DEFAULT VALUES MOVED HERE FOR VISIBILITY
 
-    AllowTcpForwarding remote
+    AllowTcpForwarding local
     PermitTunnel yes
     PasswordAuthentication no
     PermitRootLogin no
