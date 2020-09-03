@@ -22,6 +22,10 @@ data:
     PermitTunnel yes
     PasswordAuthentication no
     PermitRootLogin no
+    HostKey /etc/ssh/ssh_host_ecdsa_key
+    MaxAuthTries 10
+
+    LogLevel DEBUG1
 
     # ----------------------------------------
 
