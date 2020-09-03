@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: server-key
+type: Opaque
+data:
+  ssh_host_ecdsa_key: {{.Values.hostKeyBase64}}

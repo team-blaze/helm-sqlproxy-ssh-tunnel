@@ -25,6 +25,11 @@ spec:
           volumeMounts:
             - name: authorized-keys
               mountPath: /home/sshuser/.ssh
+              subPath: authorized_keys
+              readOnly: true
+            - name: server-key
+              mountPath: /etc/ssh
+              subPath: ssh_host_ecdsa_key
               readOnly: true
             - name: sshd-config
               mountPath: /etc/ssh/sshd_config
@@ -53,3 +58,7 @@ spec:
           defaultMode: 0600
           secret:
             secretName: authorized-keys
+        - name: server-key
+          defaultMode: 0600
+          secret:
+            secretName: server-key

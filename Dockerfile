@@ -8,6 +8,9 @@ RUN passwd -d root && \
     passwd -u sshuser && \
     chown -R sshuser:sshuser /home/sshuser
 
+RUN mkdir /home/sshuser/.ssh && \
+    chmod 700 /home/sshuser/.ssh
+
 RUN apk add --no-cache openssh
 
 COPY entrypoint.sh /
