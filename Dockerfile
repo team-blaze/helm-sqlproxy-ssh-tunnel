@@ -11,6 +11,8 @@ RUN passwd -d root && \
 RUN mkdir /home/sshuser/.ssh && \
     chmod 700 /home/sshuser/.ssh
 
+RUN mkdir -p /etc/ssh
+
 RUN apk add --no-cache openssh
 
 COPY entrypoint.sh /
