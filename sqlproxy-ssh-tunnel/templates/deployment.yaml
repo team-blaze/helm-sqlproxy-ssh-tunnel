@@ -17,14 +17,14 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: 5m
-              memory: 10Mi
+              cpu: 1m
+              memory: 8Mi
           ports:
             - containerPort: 22
               protocol: TCP
           volumeMounts:
             - name: authorized-keys
-              mountPath: /home/sshuser/.ssh/authorized_keys
+              mountPath: /home/sshuser/.ssh/authorized_keys_temp
               subPath: authorized_keys
               readOnly: true
             - name: server-key
