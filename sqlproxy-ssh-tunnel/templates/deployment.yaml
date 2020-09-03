@@ -28,7 +28,7 @@ spec:
               subPath: authorized_keys
               readOnly: true
             - name: server-key
-              mountPath: /etc/ssh
+              mountPath: /etc/ssh/ssh_host_ecdsa_key
               subPath: ssh_host_ecdsa_key
               readOnly: true
             - name: sshd-config

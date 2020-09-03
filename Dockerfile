@@ -1,7 +1,7 @@
 FROM alpine
 EXPOSE 22
 ENTRYPOINT ["/bin/ash","-c"]
-CMD ["/entrypoint.sh"]
+CMD ["exec","/usr/sbin/sshd","-D","-e"]
 
 RUN passwd -d root && \
     adduser -D -s /bin/ash sshuser && \
@@ -14,5 +14,3 @@ RUN mkdir /home/sshuser/.ssh && \
 RUN mkdir -p /etc/ssh
 
 RUN apk add --no-cache openssh
-
-COPY entrypoint.sh /
