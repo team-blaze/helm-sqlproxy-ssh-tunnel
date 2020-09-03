@@ -5,11 +5,11 @@ CMD ["/entrypoint.sh"]
 
 RUN passwd -d root && \
     adduser -D -s /bin/ash sshuser && \
-    passwd -u sshuser && \
-    chown -R sshuser:sshuser /home/sshuser
+    passwd -u sshuser
 
 RUN mkdir /home/sshuser/.ssh && \
-    chmod 700 /home/sshuser/.ssh
+    chmod 0700 /home/sshuser/.ssh && \
+    chown -R sshuser:sshuser /home/sshuser
 
 RUN mkdir -p /etc/ssh
 
