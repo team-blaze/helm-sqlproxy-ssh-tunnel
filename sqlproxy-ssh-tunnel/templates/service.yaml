@@ -13,13 +13,12 @@ spec:
 {{- end }}
   ports:
     - name: ssh
-      port: 22
-{{- if and (eq "NodePort" .Values.service.type) (hasKey .Values.service "nodePort") }}
-      nodePort: {{ .Values.service.nodePort }}
-{{- end }}
+      port: {{ .Values.service.loadBalancerPort }}
+      targetPort: 22
   selector:
     app: {{.Values.name}}
-  type: {{.Values.service.type}}
+  type: "LoadBalancer"
+  externalTrafficPolicy: Local
 {{- if .Values.service.loadBalancerIP }}
   loadBalancerIP: {{ .Values.service.loadBalancerIP }}
 {{- end }}

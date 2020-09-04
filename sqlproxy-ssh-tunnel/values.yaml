@@ -12,11 +12,15 @@ cloudsql:
   serviceAccountKeyBase64: "nice long base64 encoded of Google service account JSON"
 
 service:
-  type: "LoadBalancer"
   ## Here annotations can be added to the service
   # annotations:
   #   external-dns.alpha.kubernetes.io/hostname: vpn.example.com
   annotations: {}
-  nodePort: 32077
   externalIPs: []
   # loadBalancerIP: 10.0.0.1
+  loadBalancerPort: 22
+
+ingress:
+  # annotations:
+  #   kubernetes.io/ingress.global-static-ip-name: "already-created-global-static-ip-name"
+  annotations: {}

@@ -18,12 +18,15 @@ data:
 
     # NON-DEFAULT VALUES MOVED HERE FOR VISIBILITY
 
-    AllowTcpForwarding yes
-    PasswordAuthentication no
-    PermitRootLogin no
+    Match User sshuser
+      AllowTcpForwarding yes
+      MaxAuthTries 10
+      MaxSessions 100
+
     HostKey /etc/ssh/ssh_host_ecdsa_key
-    MaxAuthTries 10
-    MaxSessions 100
+    PermitRootLogin no
+    PasswordAuthentication no
+    AuthenticationMethods publickey
 
     LogLevel DEBUG1
 
