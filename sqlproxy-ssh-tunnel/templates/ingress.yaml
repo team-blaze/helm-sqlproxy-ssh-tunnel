@@ -8,8 +8,6 @@ metadata:
 {{- end }}
   
 spec:
-  defaultBackend:
-    service:
-      name: {{.Values.name}}
-      port:
-        number: {{.Values.service.loadBalancerPort}}
+  backend:
+    serviceName: {{.Values.name}}
+    servicePort: {{.Values.service.loadBalancerPort}}
