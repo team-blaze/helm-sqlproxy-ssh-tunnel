@@ -16,9 +16,7 @@ service:
   # annotations:
   #   external-dns.alpha.kubernetes.io/hostname: vpn.example.com
   annotations: {}
-  externalIPs: []
-  # loadBalancerIP: 10.0.0.1
-  loadBalancerPort: 22
+  externalPort: 22
 
 ingress:
   # annotations:

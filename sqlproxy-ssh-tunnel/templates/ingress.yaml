@@ -10,4 +10,4 @@ metadata:
 spec:
   backend:
     serviceName: {{.Values.name}}
-    servicePort: {{.Values.service.loadBalancerPort}}
+    servicePort: {{.Values.service.externalPort}}

@@ -7,18 +7,10 @@ metadata:
 {{ toYaml .Values.service.annotations | indent 4 }}
 {{- end }}
 spec:
-{{- if .Values.service.externalIPs }}
-  externalIPs:
-{{ toYaml .Values.service.externalIPs | indent 4 }}
-{{- end }}
   ports:
-    - name: ssh
-      port: {{ .Values.service.loadBalancerPort }}
+    - protocol: TCP
+      port: {{ .Values.service.externalPort }}
       targetPort: 22
   selector:
     app: {{.Values.name}}
-  type: "LoadBalancer"
-  externalTrafficPolicy: Local
-{{- if .Values.service.loadBalancerIP }}
-  loadBalancerIP: {{ .Values.service.loadBalancerIP }}
-{{- end }}
+  type: NodePort
