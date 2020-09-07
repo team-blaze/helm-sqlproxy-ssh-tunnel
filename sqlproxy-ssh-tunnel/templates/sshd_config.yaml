@@ -22,6 +22,7 @@ data:
       AllowTcpForwarding yes
       MaxAuthTries 10
       MaxSessions 100
+    Match all
 
     HostKey /etc/ssh/ssh_host_ecdsa_key
     PermitRootLogin no
