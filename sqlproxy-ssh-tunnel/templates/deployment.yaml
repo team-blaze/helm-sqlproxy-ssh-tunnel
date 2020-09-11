@@ -62,7 +62,7 @@ spec:
             - "{{.Values.reverseTunnel.sshUser}}@{{.Values.reverseTunnel.sshHost}}"
             - -g
             - -i
-            - <PATH_TO_PRIVATE_KEY>
+            - /root/reverse_tunnel_ed25519
             - -o
             - ServerAliveInterval=10
             - -o
