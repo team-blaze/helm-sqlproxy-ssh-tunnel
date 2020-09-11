@@ -26,7 +26,7 @@ default values, and can be overwritten via the helm `--set` flag.
 | `image`                            | Docker image and tag to use                | `berylcc/sqlproxy-ssh-tunnel:1.0` |
 | `imagePullSecrets`                 | Docker registry secret                     | unset                             |
 | `authorizedKeysBase64`             | Base64 encoded `authorized_keys`           | must be set                       |
-| `hostKeyBase64`                    | Base64 encoded `ssh_host_ecdsa_key`        | must be set                       |
+| `hostKeyBase64`                    | Base64 encoded `ssh_host_ed25519_key`      | must be set                       |
 | `cloudsql.project`                 | Docker registry secret                     | `my-project`                      |
 | `cloudsql.region`                  | Docker registry secret                     | `us-west1`                        |
 | `cloudsql.instance`                | Docker registry secret                     | `sql_instance`                    |

@@ -13,6 +13,6 @@ RUN mkdir /home/sshuser/.ssh && \
 
 RUN mkdir -p /etc/ssh
 
-RUN apk add --no-cache openssh
+RUN apk add --no-cache openssh autossh
 
 COPY entrypoint.sh /

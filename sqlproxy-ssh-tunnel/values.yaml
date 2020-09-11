@@ -5,12 +5,37 @@ authorizedKeysBase64: "nice long base64 encoded string of authorized_keys"
 hostKeyBase64: "nice long base64 encoded string of host key"
 
 cloudsql:
-  project: "my-project"
-  region: "us-west1"
-  instance: "sql_instance"
-  port: 3306
   serviceAccountKeyBase64: "nice long base64 encoded of Google service account JSON"
+  instances:
+    - instance: "sql_instance"
+      project: "my-project"
+      region: "us-west1"
+      port: 3306
 
 service:
   loadBalancerPort: 22
   # loadBalancerIP: 10.0.0.1
+
+reverseTunnel:
+  privateKeyBase64: "base64 encoded string of client private key"
+  sshUser: sshuser
+  sshHost: ssh.example.com
+  remoteDbPort: 3306
+  localDbHost: 127.0.0.1
+  localDbPort: 3306
+
+sshd_config: |-
+  GatewayPorts no
+  X11Forwarding no
+  AuthorizedKeysFile	.ssh/authorized_keys
+  HostKey /etc/ssh/ssh_host_ed25519_key
+  PermitRootLogin no
+  PasswordAuthentication no
+  AuthenticationMethods publickey
+
+  LogLevel DEBUG1
+
+  Match User sshuser
+    AllowTcpForwarding yes
+    MaxAuthTries 10
+    MaxSessions 100

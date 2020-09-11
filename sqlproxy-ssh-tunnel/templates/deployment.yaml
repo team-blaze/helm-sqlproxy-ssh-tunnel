@@ -28,8 +28,8 @@ spec:
               subPath: authorized_keys
               readOnly: true
             - name: server-key
-              mountPath: /etc/ssh/ssh_host_ecdsa_key
-              subPath: ssh_host_ecdsa_key
+              mountPath: /etc/ssh/ssh_host_ed25519_key
+              subPath: ssh_host_ed25519_key
               readOnly: true
             - name: sshd-config
               mountPath: /etc/ssh/sshd_config
@@ -38,15 +38,45 @@ spec:
         - name: sqlproxy
           image: gcr.io/cloudsql-docker/gce-proxy:1.17-alpine
           command:
-            [
-              "/cloud_sql_proxy",
-              "-instances={{.Values.cloudsql.project}}:{{.Values.cloudsql.region}}:{{.Values.cloudsql.instance}}=tcp:{{.Values.cloudsql.port}}",
-              "-credential_file=/secrets/cloudsql/sql_credentials.json",
-            ]
+            - /cloud_sql_proxy
+            - -instances={{- range .Values.cloudsql.instances -}}
+                           {{ .project }}:{{ .region }}:{{ .instance }}=tcp:0.0.0.0:{{ .port }},
+                         {{- end }}
+            - -credential_file=/secrets/cloudsql/sql_credentials.json
           volumeMounts:
             - name: sqlproxy-credential
               mountPath: /secrets/cloudsql
               readOnly: true
+{{- if .Values.reverseTunnel }}
+        - name: reverse-tunnel
+          image: {{.Values.image}}
+          imagePullPolicy: Always
+          command:
+            - autossh
+            - -M
+            - 0
+            - -f
+            - -N
+            - -R
+            - {{.Values.reverseTunnel.remoteDbPort}}:{{.Values.reverseTunnel.localDbHost}}:{{.Values.reverseTunnel.localDbPort}}
+            - "{{.Values.reverseTunnel.sshUser}}@{{.Values.reverseTunnel.sshHost}}"
+            - -g
+            - -i
+            - <PATH_TO_PRIVATE_KEY>
+            - -o
+            - ServerAliveInterval=10
+            - -o
+            - ServerAliveCountMax=1
+            - -o
+            - ExitOnForwardFailure=yes
+            - -o
+            - StrictHostKeyChecking=accept-new
+          volumeMounts:
+            - name: reverse-tunnel-private-key
+              mountPath: /root/reverse_tunnel_ed25519
+              subPath: reverse_tunnel_ed25519
+              readOnly: true
+{{- end }}
       volumes:
         - name: sshd-config
           configMap:
