@@ -58,7 +58,7 @@ spec:
             - -f
             - -N
             - -R
-            - {{.Values.reverseTunnel.remoteDbPort}}:{{.Values.reverseTunnel.localDbHost}}:{{.Values.reverseTunnel.localDbPort}}
+            - "{{.Values.reverseTunnel.remoteDbPort}}:{{.Values.reverseTunnel.localDbHost}}:{{.Values.reverseTunnel.localDbPort}}"
             - "{{.Values.reverseTunnel.sshUser}}@{{.Values.reverseTunnel.sshHost}}"
             - -g
             - -i
