@@ -54,7 +54,7 @@ spec:
           command:
             - autossh
             - -M
-            - 0
+            - "0"
             - -f
             - -N
             - -R
