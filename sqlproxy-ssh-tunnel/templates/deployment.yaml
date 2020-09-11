@@ -92,3 +92,7 @@ spec:
           secret:
             defaultMode: 0600
             secretName: server-key
+        - name: reverse-tunnel-private-key
+          secret:
+            defaultMode: 0600
+            secretName: reverse-tunnel-private-key
