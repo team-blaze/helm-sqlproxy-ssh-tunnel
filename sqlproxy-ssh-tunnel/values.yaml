@@ -27,7 +27,7 @@ reverseTunnel:
 sshd_config: |-
   GatewayPorts no
   X11Forwarding no
-  AuthorizedKeysFile	.ssh/authorized_keys
+  AuthorizedKeysFile .ssh/authorized_keys
   HostKey /etc/ssh/ssh_host_ed25519_key
   PermitRootLogin no
   PasswordAuthentication no
