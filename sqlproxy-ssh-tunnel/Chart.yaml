@@ -1,3 +1,4 @@
+apiVersion: v1
 name: sqlproxy-ssh-tunnel
 description: A Helm chart to enable connection to a Cloud SQL instance via private IP using an SSH tunnel
 version: 0.1.0

@@ -4,4 +4,4 @@ metadata:
   name: sshd-config
 data:
   sshd_config: |-
-  {{.Values.sshd_config}}
+{{.Values.sshd_config | indent 4 }}
