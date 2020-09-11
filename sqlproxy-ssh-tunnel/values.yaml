@@ -16,13 +16,12 @@ service:
   loadBalancerPort: 22
   # loadBalancerIP: 10.0.0.1
 
-reverseTunnel:
-  privateKeyBase64: "base64 encoded string of client private key"
-  sshUser: sshuser
-  sshHost: ssh.example.com
-  remoteDbPort: 3306
-  localDbHost: 127.0.0.1
-  localDbPort: 3306
+# reverseTunnel:
+#   privateKeyBase64: "base64 encoded string of client private key"
+#   sshUser: sshuser
+#   sshHost: ssh.example.com
+#   remoteDbPort: 3306
+#   localDbPort: 3306
 
 sshd_config: |-
   GatewayPorts no
@@ -33,7 +32,7 @@ sshd_config: |-
   PasswordAuthentication no
   AuthenticationMethods publickey
 
-  LogLevel DEBUG1
+  # LogLevel DEBUG1
 
   Match User sshuser
     AllowTcpForwarding yes

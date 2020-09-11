@@ -55,7 +55,7 @@ spec:
             - /entrypoint-reverse-tunnel.sh
           env:
             - name: PORT_BINDING
-              value: "{{.Values.reverseTunnel.remoteDbPort}}:{{.Values.reverseTunnel.localDbHost}}:{{.Values.reverseTunnel.localDbPort}}"
+              value: "{{.Values.reverseTunnel.remoteDbPort}}:127.0.0.1:{{.Values.reverseTunnel.localDbPort}}"
             - name: SSH_LOGIN
               value: "{{.Values.reverseTunnel.sshUser}}@{{.Values.reverseTunnel.sshHost}}"
           volumeMounts:

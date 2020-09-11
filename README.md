@@ -3,6 +3,10 @@
 This is a simple SSH jumpserver to enable tunneling in to a Google Cloud SQL instance without a
 public IP. The pod consists of an SSH server with a SQLproxy sidecar, exposed through a Loadbalancer.
 
+There's also an optional SSH client container for setting up a reverse SSH tunnel.
+
+NOTE: to keep things more secure, only ED25519 keys are used in the chart.
+
 Helm chart based on https://v3.helm.sh/docs/topics/chart_repository/#github-pages-example
 and https://github.com/technosophos/tscharts.
 
@@ -27,13 +31,22 @@ default values, and can be overwritten via the helm `--set` flag.
 | `imagePullSecrets`                 | Docker registry secret                     | unset                             |
 | `authorizedKeysBase64`             | Base64 encoded `authorized_keys`           | must be set                       |
 | `hostKeyBase64`                    | Base64 encoded `ssh_host_ed25519_key`      | must be set                       |
-| `cloudsql.project`                 | Docker registry secret                     | `my-project`                      |
-| `cloudsql.region`                  | Docker registry secret                     | `us-west1`                        |
-| `cloudsql.instance`                | Docker registry secret                     | `sql_instance`                    |
-| `cloudsql.port`                    | Docker registry secret                     | 3306                              |
+| `sshd_config`                      | SSH server configuration                   | see `values.yaml`                 |
 | `cloudsql.serviceAccountKeyBase64` | Base64 encoded Google service account JSON | must be set                       |
+| `cloudsql.instances[0].project`    | Cloud SQL instance project                 | `my-project`                      |
+| `cloudsql.instances[0].region`     | Cloud SQL instance region                  | `us-west1`                        |
+| `cloudsql.instances[0].instance`   | Cloud SQL instance name                    | `sql_instance`                    |
+| `cloudsql.instances[0].port`       | Port to bind Cloud SQL instance to         | 3306                              |
 | `service.loadBalancerPort`         | Port you want to be exposed to the outside | 22                                |
 | `service.loadBalancerIP`           | Load balancer IP (if pre-allocated)        | unset                             |
+| `reverseTunnel.privateKeyBase64`   | Base64 encoded `ssh_client_ed25519_key`    | unset                             |
+| `reverseTunnel.sshUser`            | Reverse tunnel server user                 | unset                             |
+| `reverseTunnel.sshHost`            | Reverse tunnel server host                 | unset                             |
+| `reverseTunnel.remoteDbPort`       | Reverse tunnel server database port        | unset                             |
+| `reverseTunnel.localDbPort`        | Cloud SQL instance port                    | unset                             |
+
+NOTE: you can proxy multiple Cloud SQL instances (like read replicas), but make sure to bind each
+instance to a different port.
 
 ## Notes
 

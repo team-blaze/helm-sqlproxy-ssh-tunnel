@@ -2,10 +2,10 @@ apiVersion: v1
 entries:
   sqlproxy-ssh-tunnel:
   - apiVersion: v1
-    created: "2020-09-11T11:59:11.157411+01:00"
+    created: "2020-09-11T16:08:40.030259+01:00"
     description: A Helm chart to enable connection to a Cloud SQL instance via private
       IP using an SSH tunnel
-    digest: 33a95c247ecc09bf3026e019db7da660047b35f460c81f38ddf09fd7a44464d8
+    digest: 982d7a4a3a56965227fe0455c074ff839b23fa0f2a82160ca1669f79261a98f4
     home: https://team-blaze.github.io/helm-sqlproxy-ssh-tunnel
     name: sqlproxy-ssh-tunnel
     sources:
@@ -13,4 +13,4 @@ entries:
     urls:
     - https://team-blaze.github.io/helm-sqlproxy-ssh-tunnel/sqlproxy-ssh-tunnel-0.1.0.tgz
     version: 0.1.0
-generated: "2020-09-11T11:59:11.156603+01:00"
+generated: "2020-09-11T16:08:40.028688+01:00"
