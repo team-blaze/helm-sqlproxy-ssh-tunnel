@@ -52,25 +52,12 @@ spec:
           image: {{.Values.image}}
           imagePullPolicy: Always
           command:
-            - autossh
-            - -M
-            - "0"
-            - -f
-            - -N
-            - -R
-            - "{{.Values.reverseTunnel.remoteDbPort}}:{{.Values.reverseTunnel.localDbHost}}:{{.Values.reverseTunnel.localDbPort}}"
-            - "{{.Values.reverseTunnel.sshUser}}@{{.Values.reverseTunnel.sshHost}}"
-            - -g
-            - -i
-            - /root/reverse_tunnel_ed25519
-            - -o
-            - ServerAliveInterval=10
-            - -o
-            - ServerAliveCountMax=1
-            - -o
-            - ExitOnForwardFailure=yes
-            - -o
-            - StrictHostKeyChecking=accept-new
+            - /entrypoint-reverse-tunnel.sh
+          env:
+            - name: PORT_BINDING
+              value: "{{.Values.reverseTunnel.remoteDbPort}}:{{.Values.reverseTunnel.localDbHost}}:{{.Values.reverseTunnel.localDbPort}}"
+            - name: SSH_LOGIN
+              value: "{{.Values.reverseTunnel.sshUser}}@{{.Values.reverseTunnel.sshHost}}"
           volumeMounts:
             - name: reverse-tunnel-private-key
               mountPath: /root/reverse_tunnel_ed25519

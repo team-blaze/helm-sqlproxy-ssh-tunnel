@@ -15,4 +15,4 @@ RUN mkdir -p /etc/ssh
 
 RUN apk add --no-cache openssh autossh
 
-COPY entrypoint.sh /
+COPY entrypoint.sh entrypoint-reverse-tunnel.sh /
