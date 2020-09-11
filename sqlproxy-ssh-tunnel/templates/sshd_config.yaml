@@ -3,4 +3,5 @@ kind: ConfigMap
 metadata:
   name: sshd-config
 data:
-  sshd_config: {{.Values.sshd_config}}
+  sshd_config: |-
+  {{.Values.sshd_config}}
