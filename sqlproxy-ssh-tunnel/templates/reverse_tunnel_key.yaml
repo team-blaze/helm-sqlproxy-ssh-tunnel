@@ -1,0 +1,9 @@
+{{- if .Values.reverseTunnel }}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: reverse-tunnel-private-key
+type: Opaque
+data:
+  reverse_tunnel_ed25519: {{.Values.reverseTunnel.privateKeyBase64}}
+{{- end }}
