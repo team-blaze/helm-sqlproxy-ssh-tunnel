@@ -48,6 +48,14 @@ default values, and can be overwritten via the helm `--set` flag.
 NOTE: you can proxy multiple Cloud SQL instances (like read replicas), but make sure to bind each
 instance to a different port.
 
+## Usage
+
+Once you have your chart up and running, you can SSH in and forward the SQL server port with a command like:
+
+```sh
+ssh sshuser@$SSH_SERVER_ADDRESS -i id_ed25519 -L 3306:127.0.0.1:3306 -o ExitOnForwardFailure=yes
+```
+
 ## Notes
 
 There's an image hosted in Docker Hub built from the `Dockerfile` in this repo which will work, but

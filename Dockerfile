@@ -15,4 +15,6 @@ RUN mkdir -p /etc/ssh
 
 RUN apk add --no-cache openssh autossh
 
+RUN echo -e "\033[32mYou're connected to the sqlproxy-ssh-tunnel! If you have set up port forwarding, you can connect to your database now.\033[0m" > /etc/motd
+
 COPY entrypoint.sh entrypoint-reverse-tunnel.sh /
