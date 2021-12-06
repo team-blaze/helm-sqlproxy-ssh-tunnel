@@ -24,26 +24,28 @@ https://team-blaze.github.io/sqlproxy-ssh-tunnel
 The following table lists the configurable parameters of the `sqlproxy-ssh-tunnel` chart and their
 default values, and can be overwritten via the helm `--set` flag.
 
-| Parameter                          | Description                                | Default                           |
-| ---------------------------------- | ------------------------------------------ | --------------------------------- |
-| `name`                             | Name to give to the k8s objects            | `sqlproxy-ssh-tunnel`             |
-| `image`                            | Docker image and tag to use                | `berylcc/sqlproxy-ssh-tunnel:1.0` |
-| `imagePullSecrets`                 | Docker registry secret                     | unset                             |
-| `authorizedKeysBase64`             | Base64 encoded `authorized_keys`           | must be set                       |
-| `hostKeyBase64`                    | Base64 encoded `ssh_host_ed25519_key`      | must be set                       |
-| `sshd_config`                      | SSH server configuration                   | see `values.yaml`                 |
-| `cloudsql.serviceAccountKeyBase64` | Base64 encoded Google service account JSON | must be set                       |
-| `cloudsql.instances[0].project`    | Cloud SQL instance project                 | `my-project`                      |
-| `cloudsql.instances[0].region`     | Cloud SQL instance region                  | `us-west1`                        |
-| `cloudsql.instances[0].instance`   | Cloud SQL instance name                    | `sql_instance`                    |
-| `cloudsql.instances[0].port`       | Port to bind Cloud SQL instance to         | 3306                              |
-| `service.loadBalancerPort`         | Port you want to be exposed to the outside | 22                                |
-| `service.loadBalancerIP`           | Load balancer IP (if pre-allocated)        | unset                             |
-| `reverseTunnel.privateKeyBase64`   | Base64 encoded `ssh_client_ed25519_key`    | unset                             |
-| `reverseTunnel.sshUser`            | Reverse tunnel server user                 | unset                             |
-| `reverseTunnel.sshHost`            | Reverse tunnel server host                 | unset                             |
-| `reverseTunnel.remoteDbPort`       | Reverse tunnel server database port        | unset                             |
-| `reverseTunnel.localDbPort`        | Cloud SQL instance port                    | unset                             |
+| Parameter                          | Description                                | Default                                |
+| ---------------------------------- | ------------------------------------------ | -------------------------------------- |
+| `name`                             | Name to give to the k8s objects            | `sqlproxy-ssh-tunnel`                  |
+| `image`                            | Docker image and tag to use                | `berylcc/sqlproxy-ssh-tunnel:1.0`      |
+| `imagePullSecrets`                 | Docker registry secret                     | unset                                  |
+| `authorizedKeysBase64`             | Base64 encoded `authorized_keys`           | must be set                            |
+| `hostKeyBase64`                    | Base64 encoded `ssh_host_ed25519_key`      | must be set                            |
+| `sshd_config`                      | SSH server configuration                   | see `values.yaml`                      |
+| `cloudsql.useWorkloadIdentity`     | Use Workload Identity service account      | false                                  |
+| `cloudsql.serviceAccountName`      | Name of Workload Identity service account  | unset                                  |
+| `cloudsql.serviceAccountKeyBase64` | Base64 encoded Google service account JSON | must be set if not useWorkloadIdentity |
+| `cloudsql.instances[0].project`    | Cloud SQL instance project                 | `my-project`                           |
+| `cloudsql.instances[0].region`     | Cloud SQL instance region                  | `us-west1`                             |
+| `cloudsql.instances[0].instance`   | Cloud SQL instance name                    | `sql_instance`                         |
+| `cloudsql.instances[0].port`       | Port to bind Cloud SQL instance to         | 3306                                   |
+| `service.loadBalancerPort`         | Port you want to be exposed to the outside | 22                                     |
+| `service.loadBalancerIP`           | Load balancer IP (if pre-allocated)        | unset                                  |
+| `reverseTunnel.privateKeyBase64`   | Base64 encoded `ssh_client_ed25519_key`    | unset                                  |
+| `reverseTunnel.sshUser`            | Reverse tunnel server user                 | unset                                  |
+| `reverseTunnel.sshHost`            | Reverse tunnel server host                 | unset                                  |
+| `reverseTunnel.remoteDbPort`       | Reverse tunnel server database port        | unset                                  |
+| `reverseTunnel.localDbPort`        | Cloud SQL instance port                    | unset                                  |
 
 NOTE: you can proxy multiple Cloud SQL instances (like read replicas), but make sure to bind each
 instance to a different port.
