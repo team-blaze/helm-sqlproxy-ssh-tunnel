@@ -44,7 +44,7 @@ spec:
               subPath: sshd_config
               readOnly: true
         - name: sqlproxy
-          image: gcr.io/cloudsql-docker/gce-proxy:1.27-alpine
+          image: gcr.io/cloudsql-docker/gce-proxy:1.27.0-alpine
           resources:
             requests:
               cpu: 1m
