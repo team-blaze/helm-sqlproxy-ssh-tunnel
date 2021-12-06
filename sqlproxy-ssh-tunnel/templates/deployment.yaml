@@ -42,6 +42,10 @@ spec:
               readOnly: true
         - name: sqlproxy
           image: gcr.io/cloudsql-docker/gce-proxy:1.17-alpine
+          resources:
+            requests:
+              cpu: 1m
+              memory: 10Mi
           command:
             - /cloud_sql_proxy
             - -instances={{- range .Values.cloudsql.instances -}}
@@ -56,6 +60,10 @@ spec:
         - name: reverse-tunnel
           image: {{.Values.image}}
           imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 1m
+              memory: 10Mi
           command:
             - /entrypoint-reverse-tunnel.sh
           env:

@@ -1,7 +1,13 @@
+# Changelog
+
+## 0.1.2
+
+- Add resource requests to all containers
+
 ## 0.1.1
 
-* Change k8s `Deployment` from `extensions/v1beta1` to `apps/v1`
+- Change k8s `Deployment` from `extensions/v1beta1` to `apps/v1`
 
 ## 0.1.0
 
-* Initial version
+- Initial version
