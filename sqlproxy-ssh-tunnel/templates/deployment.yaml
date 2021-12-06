@@ -16,6 +16,9 @@ spec:
         app: {{.Values.name}}
     spec:
       dnsPolicy: ClusterFirst
+{{- if .Values.useWorkloadIdentity }}
+      serviceAccountName: {{.Values.serviceAccountName}}
+{{- end }}
       containers:
         - name: {{.Values.name}}
           image: {{.Values.image}}
@@ -51,11 +54,13 @@ spec:
             - -instances={{- range .Values.cloudsql.instances -}}
                            {{ .project }}:{{ .region }}:{{ .instance }}=tcp:0.0.0.0:{{ .port }},
                          {{- end }}
+{{- if not .Values.useWorkloadIdentity }}
             - -credential_file=/secrets/cloudsql/sql_credentials.json
           volumeMounts:
             - name: sqlproxy-credential
               mountPath: /secrets/cloudsql
               readOnly: true
+{{- end }}
 {{- if .Values.reverseTunnel }}
         - name: reverse-tunnel
           image: {{.Values.image}}
@@ -81,9 +86,6 @@ spec:
         - name: sshd-config
           configMap:
             name: sshd-config
-        - name: sqlproxy-credential
-          secret:
-            secretName: sqlproxy-credential
         - name: authorized-keys
           secret:
             defaultMode: 0600
@@ -96,3 +98,8 @@ spec:
           secret:
             defaultMode: 0600
             secretName: reverse-tunnel-private-key
+{{- if not .Values.useWorkloadIdentity }}
+        - name: sqlproxy-credential
+          secret:
+            secretName: sqlproxy-credential
+{{- end }}
