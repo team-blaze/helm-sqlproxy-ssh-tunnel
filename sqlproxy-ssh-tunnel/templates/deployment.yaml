@@ -56,6 +56,7 @@ spec:
                          {{- end }}
 {{- if not .Values.useWorkloadIdentity }}
             - -credential_file=/secrets/cloudsql/sql_credentials.json
+            - -log_debug_stdout=true
           volumeMounts:
             - name: sqlproxy-credential
               mountPath: /secrets/cloudsql
