@@ -6,7 +6,7 @@ hostKeyBase64: "nice long base64 encoded string of host key"
 
 cloudsql:
   useWorkloadIdentity: false
-  # serviceAccountName: "workload-identity-service-account-name"
+  serviceAccountName: "sqlproxy-workload-identity"
   serviceAccountKeyBase64: "nice long base64 encoded of Google service account JSON - if not using workload identity"
   instances:
     - instance: "sql_instance"
@@ -40,5 +40,3 @@ sshd_config: |-
     AllowTcpForwarding yes
     MaxAuthTries 10
     MaxSessions 100
-
-serviceAccountName: sqlproxy-workload-identity
