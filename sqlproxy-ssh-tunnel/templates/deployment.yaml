@@ -18,6 +18,13 @@ spec:
       dnsPolicy: ClusterFirst
 {{- if .Values.useWorkloadIdentity }}
       serviceAccountName: {{.Values.serviceAccountName}}
+      tolerations:
+      - key: "workload-identity"
+        operator: "Equal"
+        value: "enabled"
+        effect: "NoSchedule"
+      nodeSelector:
+        workload-identity: "enabled"
 {{- end }}
       containers:
         - name: {{.Values.name}}

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2
+
+- Enable Workload Identity
+
 ## 0.2.1
 
 - Enable `-log_debug_stdout=true` flag to report info logs to stdout and errors to stderr
