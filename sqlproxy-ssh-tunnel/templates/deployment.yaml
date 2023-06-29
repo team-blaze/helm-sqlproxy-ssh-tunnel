@@ -19,6 +19,14 @@ spec:
 {{- if .Values.useWorkloadIdentity }}
       serviceAccountName: {{.Values.serviceAccountName}}
 {{- end }}
+      serviceAccountName: "sqlproxy-workload-identity"
+      tolerations:
+      - key: "workload-identity"
+        operator: "Equal"
+        value: "enabled"
+        effect: "NoSchedule"
+      nodeSelector:
+        workload-identity: "enabled"
       containers:
         - name: {{.Values.name}}
           image: {{.Values.image}}
