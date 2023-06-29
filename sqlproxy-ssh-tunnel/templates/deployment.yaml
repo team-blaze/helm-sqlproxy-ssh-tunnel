@@ -18,8 +18,6 @@ spec:
       dnsPolicy: ClusterFirst
 {{- if .Values.useWorkloadIdentity }}
       serviceAccountName: {{.Values.serviceAccountName}}
-{{- end }}
-      serviceAccountName: "sqlproxy-workload-identity"
       tolerations:
       - key: "workload-identity"
         operator: "Equal"
@@ -27,6 +25,7 @@ spec:
         effect: "NoSchedule"
       nodeSelector:
         workload-identity: "enabled"
+{{- end }}
       containers:
         - name: {{.Values.name}}
           image: {{.Values.image}}
