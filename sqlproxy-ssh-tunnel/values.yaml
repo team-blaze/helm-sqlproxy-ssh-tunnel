@@ -40,3 +40,5 @@ sshd_config: |-
     AllowTcpForwarding yes
     MaxAuthTries 10
     MaxSessions 100
+
+serviceAccountName: sqlproxy-workload-identity
