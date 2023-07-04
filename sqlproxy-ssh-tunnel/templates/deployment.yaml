@@ -16,8 +16,8 @@ spec:
         app: {{.Values.name}}
     spec:
       dnsPolicy: ClusterFirst
-{{- if .Values.useWorkloadIdentity }}
-      serviceAccountName: {{.Values.serviceAccountName}}
+{{- if .Values.cloudsql.useWorkloadIdentity }}
+      serviceAccountName: {{.Values.cloudsql.serviceAccountName}}
       tolerations:
       - key: "workload-identity"
         operator: "Equal"
@@ -58,12 +58,12 @@ spec:
               memory: 10Mi
           command:
             - /cloud_sql_proxy
+            - -log_debug_stdout=true
             - -instances={{- range .Values.cloudsql.instances -}}
                            {{ .project }}:{{ .region }}:{{ .instance }}=tcp:0.0.0.0:{{ .port }},
                          {{- end }}
-{{- if not .Values.useWorkloadIdentity }}
+{{- if not .Values.cloudsql.useWorkloadIdentity }}
             - -credential_file=/secrets/cloudsql/sql_credentials.json
-            - -log_debug_stdout=true
           volumeMounts:
             - name: sqlproxy-credential
               mountPath: /secrets/cloudsql
@@ -106,7 +106,7 @@ spec:
           secret:
             defaultMode: 0600
             secretName: reverse-tunnel-private-key
-{{- if not .Values.useWorkloadIdentity }}
+{{- if not .Values.cloudsql.useWorkloadIdentity }}
         - name: sqlproxy-credential
           secret:
             secretName: sqlproxy-credential
