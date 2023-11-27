@@ -16,7 +16,6 @@ spec:
         app: {{.Values.name}}
     spec:
       dnsPolicy: ClusterFirst
-{{- if .Values.cloudsql.useWorkloadIdentity }}
       serviceAccountName: {{.Values.cloudsql.serviceAccountName}}
       tolerations:
       - key: "workload-identity"
@@ -25,7 +24,6 @@ spec:
         effect: "NoSchedule"
       nodeSelector:
         workload-identity: "enabled"
-{{- end }}
       containers:
         - name: {{.Values.name}}
           image: {{.Values.image}}
@@ -62,13 +60,6 @@ spec:
             - -instances={{- range .Values.cloudsql.instances -}}
                            {{ .project }}:{{ .region }}:{{ .instance }}=tcp:0.0.0.0:{{ .port }},
                          {{- end }}
-{{- if not .Values.cloudsql.useWorkloadIdentity }}
-            - -credential_file=/secrets/cloudsql/sql_credentials.json
-          volumeMounts:
-            - name: sqlproxy-credential
-              mountPath: /secrets/cloudsql
-              readOnly: true
-{{- end }}
 {{- if .Values.reverseTunnel }}
         - name: reverse-tunnel
           image: {{.Values.image}}
@@ -106,8 +97,3 @@ spec:
           secret:
             defaultMode: 0600
             secretName: reverse-tunnel-private-key
-{{- if not .Values.cloudsql.useWorkloadIdentity }}
-        - name: sqlproxy-credential
-          secret:
-            secretName: sqlproxy-credential
-{{- end }}

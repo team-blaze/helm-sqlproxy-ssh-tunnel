@@ -32,9 +32,7 @@ default values, and can be overwritten via the helm `--set` flag.
 | `authorizedKeysBase64`             | Base64 encoded `authorized_keys`           | must be set                            |
 | `hostKeyBase64`                    | Base64 encoded `ssh_host_ed25519_key`      | must be set                            |
 | `sshd_config`                      | SSH server configuration                   | see `values.yaml`                      |
-| `cloudsql.useWorkloadIdentity`     | Use Workload Identity service account      | false                                  |
 | `cloudsql.serviceAccountName`      | Name of Workload Identity service account  | unset                                  |
-| `cloudsql.serviceAccountKeyBase64` | Base64 encoded Google service account JSON | must be set if not useWorkloadIdentity |
 | `cloudsql.instances[0].project`    | Cloud SQL instance project                 | `my-project`                           |
 | `cloudsql.instances[0].region`     | Cloud SQL instance region                  | `us-west1`                             |
 | `cloudsql.instances[0].instance`   | Cloud SQL instance name                    | `sql_instance`                         |
