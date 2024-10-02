@@ -1,5 +1,5 @@
 name: sqlproxy-ssh-tunnel
-image: berylcc/sqlproxy-ssh-tunnel:1.0.1-rc.0
+image: berylcc/sqlproxy-ssh-tunnel:1.0.1
 # imagePullSecrets: "my-docker-repo-secret"
 authorizedKeysBase64: "nice long base64 encoded string of authorized_keys"
 hostKeyBase64: "nice long base64 encoded string of host key"
