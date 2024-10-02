@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:3.12.12
 EXPOSE 22
 ENTRYPOINT ["/bin/ash","-c"]
 CMD ["/entrypoint.sh"]
@@ -13,7 +13,7 @@ RUN mkdir /home/sshuser/.ssh && \
 
 RUN mkdir -p /etc/ssh
 
-RUN apk add --no-cache openssh autossh
+RUN apk add --no-cache openssh autossh "zlib>1.2.12-r2"
 
 RUN echo -e "\033[32mYou're connected to the sqlproxy-ssh-tunnel! If you have set up port forwarding, you can connect to your database now.\033[0m" > /etc/motd
 
