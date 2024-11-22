@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.7
+
+- Updates the apline linux and gce-proxy versions
+
 ## 0.2.4
 
 - More change to Workload Identity conditional statement 
