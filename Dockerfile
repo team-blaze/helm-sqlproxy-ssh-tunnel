@@ -1,4 +1,4 @@
-FROM alpine:3.12.12
+FROM alpine:3.19.4
 EXPOSE 22
 ENTRYPOINT ["/bin/ash","-c"]
 CMD ["/entrypoint.sh"]
