@@ -2,7 +2,7 @@
 
 REGISTRY ?= berylcc
 NAME := sqlproxy-ssh-tunnel
-TAG ?= 1.0.2
+TAG ?= 1.0.3
 IMAGE := $(REGISTRY)/$(NAME):$(TAG)
 
 ifeq ($(REGISTRY),)
