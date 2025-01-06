@@ -17,6 +17,9 @@ cloudsql:
 service:
   loadBalancerPort: 22
   # loadBalancerIP: 10.0.0.1
+  # sourceRanges: 
+  #   - 127.0.0.1
+  #   - 192.168.0.1
 
 # reverseTunnel:
 #   privateKeyBase64: "base64 encoded string of client private key"
