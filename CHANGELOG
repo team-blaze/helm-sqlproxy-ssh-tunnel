@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.9
+
+- Adds loadBalancerSourceRanges to the service definition
+
 ## 0.2.8
 
 - Updates alpine linux version
