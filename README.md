@@ -41,6 +41,7 @@ default values, and can be overwritten via the helm `--set` flag.
 | `cloudsql.instances[0].port`       | Port to bind Cloud SQL instance to         | 3306                                   |
 | `service.loadBalancerPort`         | Port you want to be exposed to the outside | 22                                     |
 | `service.loadBalancerIP`           | Load balancer IP (if pre-allocated)        | unset                                  |
+| `service.sourceRanges`             | Load balancer firewall source IPs          | unset                                  |
 | `reverseTunnel.privateKeyBase64`   | Base64 encoded `ssh_client_ed25519_key`    | unset                                  |
 | `reverseTunnel.sshUser`            | Reverse tunnel server user                 | unset                                  |
 | `reverseTunnel.sshHost`            | Reverse tunnel server host                 | unset                                  |
